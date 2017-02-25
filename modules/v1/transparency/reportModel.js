@@ -7,12 +7,12 @@ const modelName = 'report'
 
 const structure = {
   last_updated_by: {
-    required: false,
+    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
   report_group: {
-    required: false,
+    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'report_group'
   },
@@ -38,8 +38,8 @@ const structure = {
     required: true
   },
   invoice_image: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    default: 'news/no_image.jpg',
     required: false
   }
 }
