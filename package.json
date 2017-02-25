@@ -7,6 +7,7 @@
     "test": "npm run test:integration && npm run test:unit",
     "start": "nodemon index.js",
     "dev": "NODE_ENV=development nodemon index.js",
+	"dev-win": "set NODE_ENV=development && nodemon index.js",
     "prod": "NODE_ENV=production nodemon index.js",
     "test:integration": "mocha tests/integration/**/*.spec.js",
     "test:unit": "mocha tests/unit/**/*.spec.js",

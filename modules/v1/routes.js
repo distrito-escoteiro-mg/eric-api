@@ -15,5 +15,8 @@ router.use('/news', require('./news/routes'))
 router.use('/events', require('./event/routes'))
 router.use('/districts', require('./district/routes'))
 
+// metropolitano
+router.use('/transparency', require('./transparency/routes'))
+
 // Return router
 module.exports = router
