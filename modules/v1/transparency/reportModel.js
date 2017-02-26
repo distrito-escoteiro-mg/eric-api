@@ -41,6 +41,11 @@ const structure = {
     type: String,
     default: 'news/no_image.jpg',
     required: false
+  },
+  value: {
+    type: Number,
+    default: 0,
+    required: true
   }
 }
 

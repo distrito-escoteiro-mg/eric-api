@@ -5,7 +5,7 @@ const modelName = 'reportgroup'
 
 const structure = {
   last_updated_by: {
-    required: false,
+    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
@@ -13,6 +13,10 @@ const structure = {
     type: String,
     required: true,
     unique: true
+  },
+  active: {
+    type: Boolean,
+    required: true
   }
 }
 
