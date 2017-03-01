@@ -3,6 +3,7 @@ const handleValidation = rfr('/helpers/validation')
 const reportGroupModel = require('./reportGroupModel').model
 
 const uniqueReportGroupValidator = (req, res, next) => {
+  console.log(req.body)
   reportGroupModel
     .findOne({name: req.body.name})
     .exec((err, value) => {

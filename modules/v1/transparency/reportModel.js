@@ -3,7 +3,7 @@ const modelName = 'report'
 
 /* {"last_updated_by": "", "report_group": "", "type": "Despesa",
 "short_description": "teste", "complete_description": "say my name",
-"date": 1391141532000, "provider": "loja do zezinho", "invoice_image": "string de teste"} */
+"date": 1391141532000, "provider": "loja do zezinho", "invoice_image": "string de teste", "value": 19,75} */
 
 const structure = {
   last_updated_by: {
@@ -14,7 +14,7 @@ const structure = {
   report_group: {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'report_group'
+    ref: 'reportgroup'
   },
   type: {
     type: String,
@@ -41,6 +41,11 @@ const structure = {
     type: String,
     default: 'news/no_image.jpg',
     required: false
+  },
+  value: {
+    type: Number,
+    default: 0,
+    required: true
   }
 }
 
