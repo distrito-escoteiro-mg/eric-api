@@ -29,8 +29,7 @@ const createFacebookPost = (instance) => {
   const data = {
     published: false,
     message: `Notícias! ${instance.title} - Veja mais no link. #Escoteiros #EscoteirosDeMinas`,
-    link: `http://www.google.com`,
-    // link: `${process.env.NEWS_URL}${instance.slug}`,
+    link: `${process.env.NEWS_URL}${instance.slug}`,
     scheduled_publish_time: Math.round(new Date().getTime() / 1000) + (60 * 60)
   }
   FB.api(`${process.env.FB_PAGE}/feed`, 'post', data, (res) => {
@@ -41,7 +40,7 @@ const createFacebookPost = (instance) => {
     }
 
     const query = {_id: instance._id}
-    const mod = {$set: {fb_post_id: res.post_id}}
+    const mod = {$set: {fb_post_id: (res.post_id || res.id)}}
     Model.findOneAndUpdate(query, mod, {new: true}, (err, data) => {
       if (err) throw err
     })
@@ -97,12 +96,13 @@ const customMethods = {
 
     modelInstance.save((err, data) => {
       if (err) throw err
-      createFacebookPost(data)
-
       data
       .populate('last_updated_by', (err, news) => {
         if (err) throw err
         res.status(200).json(news)
+
+        // Post on facebook after 5 minutes
+        setTimeout(() => { createFacebookPost(data) }, (60 * 5) * 1000)
       })
     })
   },

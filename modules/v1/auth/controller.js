@@ -19,11 +19,12 @@ const customMethods = {
     const payload = {
       sub: user.id,
       data: {
+        roles: user.roles,
         name: user.name
       }
     }
     const options = {
-      expiresIn: '30d',
+      expiresIn: '365d',
       issuer: 'SREMG-API'
     }
 
