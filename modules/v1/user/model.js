@@ -20,6 +20,14 @@ const structure = {
     required: true,
     bcrypt: true,
     select: false
+  },
+  roles: [{
+    type: String
+  }],
+  passwordToken: {
+    type: String,
+    required: false,
+    select: false
   }
 }
 
