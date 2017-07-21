@@ -6,19 +6,25 @@ require('./config/db')
 const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
+const busboyBodyParser = require('./helpers/body-parser')
 const logger = require('morgan')
 const cors = require('cors')
 const validator = require('express-validator')
 const app = express()
 const server = require('./config/server')
 const versions = ['v1']
+require('./config/template').configure(app)
 
 global._base = path.join(__dirname, '/')
 
 // Middlewares
 if (app.get('env') === 'development') {
   app.use(logger('dev'))
+  app.get('/template', (req, res) => {
+    res.render(`${req.query.path}`)
+  })
 }
+app.use(busboyBodyParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())

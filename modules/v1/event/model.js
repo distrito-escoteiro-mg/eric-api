@@ -1,6 +1,25 @@
 const mongoose = require('mongoose')
 const modelName = 'events'
 
+const options = {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+}
+
+const fileStructure = {
+  path: {
+    type: String,
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  }
+}
+const fileSchema = mongoose.Schema(fileStructure, options)
+
 const structure = {
   title: {
     type: String,
@@ -29,33 +48,25 @@ const structure = {
   },
   end_date: {
     type: Date,
-    required: true
+    required: false
   },
-  type: {
+  section: [{
     type: String,
-    enum: ['Regional', 'Distrital', 'Nacional', 'Internacional', 'Outro'],
-    required: true
+    enum: ['Ramo Lobinho', 'Ramo Escoteiro', 'Ramo Sênior', 'Ramo Pioneiro', 'Adultos']
+  }],
+  hosts: [{
+    type: String,
+    enum: ['Regional', 'Distrital', 'Nacional', 'Internacional', 'Outro']
+  }],
+  files: [fileSchema],
+  last_updated_by: {
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
   },
-  files: [{
-    path: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    created_at: {
-      type: Date,
-      default: Date.now
-    }
-  }]
-}
-
-const options = {
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+  fb_post_id: {
+    required: false,
+    type: String
   }
 }
 
